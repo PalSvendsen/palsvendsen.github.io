@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 1. Du skal vise frem et random navn i en div om du trykker på en knapp “Random name”. -->
+    <!-- 2. Lag et inputfelt der du kan legge til flere navn som havner i listen. -->
+    <!-- Lag en knapp “Show all names” som viser frem alle navnene i en liste - og endrer knappeteksten til “Hide all names”.
+        Dersom du trykker på knappen en gang til så forsvinner navnelisten fra viewet. -->
+<div id="random"></div>
+<button onclick="randomName()">Random Name</button>
+<input type="text" onchange="getInput(this.value)" placeholder="Legg til navn">
+<div id="allNames"></div>
+<button id="showAll" onclick="toggleNames()">Show all names</button>
+<script>
+    const names = ["Pål", "Marius", "Leif"];
+    let nameIndex = Math.floor(Math.random() * names.length);
+    let isNamesVisible = false;
+
+function randomName() {
+    nameIndex = Math.floor(Math.random() * names.length);
+    document.getElementById('random').innerHTML = names[nameIndex];
+}
+
+function getInput(input){
+    names.push(input);
+    console.log(names);
+}
+
+function toggleNames() {
+    const allNames = document.getElementById('allNames');
+    const showAll = document.getElementById('showAll');
+
+    if (isNamesVisible) {
+        allNames.innerHTML = '';
+        showAll.textContent = 'Show all names';
+    } else {
+        for (let index = 0; index < names.length; index++) {
+            const element = names[index];
+            allNames.innerHTML += "<p>" + element + "</p>";
+        }
+        showAll.textContent = 'Hide all names';
+    }
+
+    isNamesVisible = !isNamesVisible;
+}
+</script>
+</body>
+</html>
